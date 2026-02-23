@@ -26,4 +26,14 @@
         <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.*"/>
         <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.*"/>
     </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\TwentyGameChallenge.Core\TwentyGameChallenge.Core.csproj" />
+      <ProjectReference Include="..\TwentyGameChallenge.DungeonSlime\TwentyGameChallenge.DungeonSlime.csproj" />
+      <ProjectReference Include="..\TwentyGameChallenge.Pong\TwentyGameChallenge.Pong.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+        <MonoGameContentReference Include="..\TwentyGameChallenge.DungeonSlime\Content\Content.mgcb">
+            <Link>Content\Content.mgcb</Link>
+        </MonoGameContentReference>
+    </ItemGroup>
 </Project>
