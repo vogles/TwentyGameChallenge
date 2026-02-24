@@ -29,12 +29,12 @@ public class DungeonSlimeGame : BaseGame
         // TODO: use this.Content to load your game content here
         // _logo = Content.Load<Texture2D>("logo");
 
-        var atlas = TextureAtlas.FromFile(Content, "images/atlas-definition.xml");
+        var atlas = SpriteAtlas.FromFile(Content, "images/atlas-definition.xml");
 
         _slime = new GameObject();
         _slime.AddComponent(new SpriteRenderer(SpriteBatch)
         {
-            Sprite = atlas.CreateSprite("slime-1")
+            Sprite = atlas.GetSprite("slime-1")
         });
         _slime.GetComponent<Transform>()
             .Scale(4, 4, 1);
@@ -42,7 +42,7 @@ public class DungeonSlimeGame : BaseGame
         _bat = new GameObject();
         _bat.AddComponent(new SpriteRenderer(SpriteBatch)
         {
-            Sprite = atlas.CreateSprite("bat-1")
+            Sprite = atlas.GetSprite("bat-1")
         });
         _bat.GetComponent<Transform>()
             .Scale(4, 4, 1)

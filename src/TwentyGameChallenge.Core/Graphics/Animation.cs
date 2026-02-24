@@ -44,6 +44,6 @@ public class Animation
 
     public void Draw(SpriteBatch spriteBatch, Vector2 position)
     {
-        Frames[_currentFrame].Draw(spriteBatch, position);
+        // Frames[_currentFrame].Draw(spriteBatch, position);
     }
 }

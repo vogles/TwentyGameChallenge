@@ -5,38 +5,33 @@ namespace TwentyGameChallenge.Core.Graphics;
 
 public class Sprite
 {
-    public TextureRegion Region { get; set; }
+    public Texture2D Texture { get; set; }
 
-    public Color Color { get; set; } = Color.White;
-
-    public float Rotation { get; set; } = 0f;
-
-    public Vector2 Scale { get; set; } = Vector2.One;
-
+    public Rectangle SourceRectangle { get; set; } = Rectangle.Empty;
+    
     public Vector2 Origin { get; set; } = Vector2.Zero;
 
-    public SpriteEffects Effects { get; set; } = SpriteEffects.None;
+    public float Width => SourceRectangle.Width;
 
-    public float LayerDepth { get; set; } = 0f;
-
-    public float Width => Region.Width * Scale.X;
-
-    public float Height => Region.Height * Scale.Y;
+    public float Height => SourceRectangle.Height;
 
     public Sprite() { }
+    
+    public Sprite(Texture2D texture, int x, int y, int width, int height) : this(texture, new Rectangle(x, y, width, height)) { }
 
-    public Sprite(TextureRegion region)
+    public Sprite(Texture2D texture, Rectangle sourceRectangle)
     {
-        Region = region;
+        Texture = texture;
+        SourceRectangle = sourceRectangle;
     }
 
     public void CenterOrigin()
     {
-        Origin = new Vector2(Region.Width, Region.Height) * 0.5f;
+        Origin = new Vector2(Width, Height) * 0.5f;
     }
 
     public void Draw(SpriteBatch spriteBatch, Vector2 position)
     {
-        Region.Draw(spriteBatch, position, Color, Rotation, Origin, Scale, Effects, LayerDepth);
+        // Region.Draw(spriteBatch, position, Color, Rotation, Origin, Scale, Effects, LayerDepth);
     }
 }

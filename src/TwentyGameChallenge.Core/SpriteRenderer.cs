@@ -13,6 +13,10 @@ public class SpriteRenderer : IDrawableComponent
     
     public Sprite Sprite { get; set; }
 
+    public Color Color { get; set; } = Color.White;
+    
+    public float LayerDepth { get; set; } = 0f;
+    
     public SpriteRenderer(SpriteBatch spriteBatch)
     {
         _spriteBatch = spriteBatch;
@@ -20,25 +24,24 @@ public class SpriteRenderer : IDrawableComponent
     
     public void Draw(GameTime gameTime)
     {
+        if (Sprite == null)
+            return;
+        
         var transform = GameObject.GetComponent<Transform>();
         var position = transform.WorldPosition;
         var scale = transform.WorldScale;
         var rotation = transform.RotationInEulerAngles();
-        var textureRegion = Sprite?.Region;
 
-        if (textureRegion != null)
-        {
-            _spriteBatch.Draw(
-                textureRegion.Texture, 
-                position.ToVector2(), 
-                textureRegion.SourceRectangle,
-                Sprite.Color,
-                rotation.Z,
-                Sprite.Origin,
-                scale.ToVector2(),
-                Sprite.Effects,
-                Sprite.LayerDepth);
-        }
+        _spriteBatch.Draw(
+            Sprite.Texture, 
+            position.ToVector2(), 
+            Sprite.SourceRectangle,
+            Color,
+            rotation.Z,
+            Sprite.Origin,
+            scale.ToVector2(),
+            SpriteEffects.None,
+            LayerDepth);
     }
 
     public int DrawOrder { get; private set; } = 0;

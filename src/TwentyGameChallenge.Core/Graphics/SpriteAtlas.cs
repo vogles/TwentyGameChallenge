@@ -9,33 +9,33 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TwentyGameChallenge.Core.Graphics;
 
-public class TextureAtlas
+public class SpriteAtlas
 {
-    private Dictionary<string, TextureRegion> _regions = new Dictionary<string, TextureRegion>();
+    private Dictionary<string, Sprite> _sprites = new Dictionary<string, Sprite>();
     private Dictionary<string, Animation> _animations = new Dictionary<string, Animation>();
  
     public Texture2D Texture { get; private set; }
 
-    public TextureAtlas() { }
+    public SpriteAtlas() { }
 
-    public TextureAtlas(Texture2D texture)
+    public SpriteAtlas(Texture2D texture)
     {
         Texture = texture;
     }
 
-    public void AddRegion(string name, int x, int y, int width, int height)
+    public void AddSprite(string name, int x, int y, int width, int height)
     {
-        _regions.Add(name, new TextureRegion(Texture, x, y, width, height));
+        _sprites.Add(name, new Sprite(Texture, x, y, width, height));
     }
 
-    public TextureRegion GetRegion(string name)
+    public Sprite GetSprite(string name)
     {
-        return _regions[name];
+        return _sprites[name];
     }
 
-    public void RemoveRegion(string name)
+    public void RemoveSprite(string name)
     {
-        _regions.Remove(name);
+        _sprites.Remove(name);
     }
 
     public void AddAnimation(string animationName, Animation animation)
@@ -55,19 +55,13 @@ public class TextureAtlas
 
     public void Clear()
     {
-        _regions.Clear();
+        _sprites.Clear();
         _animations.Clear();
     }
 
-    public Sprite CreateSprite(string spriteName)
+    public static SpriteAtlas FromFile(ContentManager content, string assetName)
     {
-        var region = GetRegion(spriteName);
-        return new Sprite(region);
-    }
-
-    public static TextureAtlas FromFile(ContentManager content, string assetName)
-    {
-        var atlas = new TextureAtlas();
+        var atlas = new SpriteAtlas();
         var filePath = Path.Combine(content.RootDirectory, assetName);
 
         using (var stream = TitleContainer.OpenStream(filePath))
@@ -94,7 +88,7 @@ public class TextureAtlas
 
                         if (!String.IsNullOrEmpty(name))
                         {
-                            atlas.AddRegion(name, x, y, width, height);
+                            atlas.AddSprite(name, x, y, width, height);
                         }
                     }
                 }
@@ -116,7 +110,7 @@ public class TextureAtlas
                         foreach (var frame in frames)
                         {
                             var regionName = frame.Attribute("region")?.Value;
-                            var sprite = atlas.CreateSprite(regionName);
+                            var sprite = atlas.GetSprite(regionName);
                             frameList.Add(sprite);
                         }
 
