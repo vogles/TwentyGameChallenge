@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using TwentyGameChallenge.Core;
+using TwentyGameChallenge.Core.Components;
 using TwentyGameChallenge.Core.Graphics;
 
 namespace TwentyGameChallenge.DungeonSlime;
@@ -32,27 +33,27 @@ public class DungeonSlimeGame : BaseGame
         var atlas = SpriteAtlas.FromFile(Content, "images/atlas-definition.xml");
 
         _slime = new GameObject();
+        _slime.GetComponent<Transform>()
+            .Scale(4, 4, 1);
         _slime.AddComponent(new SpriteRenderer(SpriteBatch)
         {
             Sprite = atlas.GetSprite("slime-1")
         });
-        _slime.GetComponent<Transform>()
-            .Scale(4, 4, 1);
+        var slimeAnimator = _slime.AddComponent<Animator>();
+        slimeAnimator.Animation = atlas.GetAnimation("slime-idle");
+        slimeAnimator.Play();
         
         _bat = new GameObject();
+        _bat.GetComponent<Transform>()
+            .Scale(4, 4, 1)
+            .Translate(90, 0, 0);
         _bat.AddComponent(new SpriteRenderer(SpriteBatch)
         {
             Sprite = atlas.GetSprite("bat-1")
         });
-        _bat.GetComponent<Transform>()
-            .Scale(4, 4, 1)
-            .Translate(90, 0, 0);
-        // _slime = atlas.GetAnimation(("slime-idle"));
-        // _bat = atlas.GetAnimation("bat-idle");
-        // _slime = atlas.CreateSprite("slime");
-        // _slime.Scale = new Vector2(4, 4);
-        // _bat = atlas.CreateSprite("bat");
-        // _bat.Scale = new Vector2(4, 4);
+        var batAnimator = _bat.AddComponent<Animator>();
+        batAnimator.Animation = atlas.GetAnimation("bat-idle");
+        batAnimator.Play();
     }
 
     protected override void Update(GameTime gameTime)

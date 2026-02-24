@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Xna.Framework;
 
-namespace TwentyGameChallenge.Core;
+namespace TwentyGameChallenge.Core.Components;
 
 public class Transform : IComponent
 {

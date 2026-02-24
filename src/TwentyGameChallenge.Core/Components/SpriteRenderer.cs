@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using TwentyGameChallenge.Core.Components;
 using TwentyGameChallenge.Core.Graphics;
 
 namespace TwentyGameChallenge.Core;

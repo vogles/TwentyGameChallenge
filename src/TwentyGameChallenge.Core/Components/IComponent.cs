@@ -1,4 +1,4 @@
-namespace TwentyGameChallenge.Core;
+namespace TwentyGameChallenge.Core.Components;
 
 public interface IComponent
 {

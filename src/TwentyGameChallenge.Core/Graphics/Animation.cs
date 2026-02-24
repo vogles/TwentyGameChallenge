@@ -25,25 +25,4 @@ public class Animation
         Frames = frames;
         Delay = delay;
     }
-
-    public void Update(GameTime gameTime)
-    {
-        _elapsed += gameTime.ElapsedGameTime;
-
-        if (_elapsed >= Delay)
-        {
-            _elapsed -= Delay;
-            _currentFrame++;
-
-            if (_currentFrame >= Frames.Count)
-            {
-                _currentFrame = 0;
-            }
-        }
-    }
-
-    public void Draw(SpriteBatch spriteBatch, Vector2 position)
-    {
-        // Frames[_currentFrame].Draw(spriteBatch, position);
-    }
 }

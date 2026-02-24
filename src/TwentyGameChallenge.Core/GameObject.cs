@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using TwentyGameChallenge.Core.Components;
 
 namespace TwentyGameChallenge.Core;
 
